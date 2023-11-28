@@ -1,6 +1,6 @@
 
+import { BowlingGame, processGameString } from "./main";
 import { describe, expect, test } from "@jest/globals";
-import { BowlingGame } from "./main";
 import { beforeEach } from "@jest/globals";
 
 describe("BowlingGame", () => {
@@ -15,10 +15,11 @@ describe("BowlingGame", () => {
             game.roll("X");
         }
         expect(game.score()).toBe(300);
-    });
+    }
+    );
 
-    test("all spares with 5", () => {
-        for (let i = 0; i < 21; i++) {
+    test("When all spares", () => {
+        for (let i = 0; i < 21; i++) { // 21 rolls because of the bonus roll
             game.roll("5/");
         }
         expect(game.score()).toBe(150);
@@ -29,47 +30,26 @@ describe("BowlingGame", () => {
             game.roll("9-");
         }
         expect(game.score()).toBe(90);
+    }
+    );
+
+    test("When no input is given", () => {
+        expect(() => {
+            processGameString("");
+        }).toThrow("Invalid input");
     });
 
-    test("all nines with 0", () => {
-        for (let i = 0; i < 10; i++) {
-            game.roll("9-");
-        }
-        expect(game.score()).toBe(90);
+    // with mixed input
+    test("When input is mixed", () => {
+        expect(() => {
+            processGameString("X 9- 5/ 81 9- 9- 9- 9- 9- 9-");
+        }).toThrow("Invalid input");
     });
 
-    test("all nines with 0", () => {
-        for (let i = 0; i < 10; i++) {
-            game.roll("9-");
-        }
-        expect(game.score()).toBe(90);
-    });
-
-    test("all nines with 0", () => {
-        for (let i = 0; i < 10; i++) {
-            game.roll("9-");
-        }
-        expect(game.score()).toBe(90);
-    });
-
-    test("all nines with 0", () => {
-        for (let i = 0; i < 10; i++) {
-            game.roll("9-");
-        }
-        expect(game.score()).toBe(90);
-    });
-
-    test("all nines with 0", () => {
-        for (let i = 0; i < 10; i++) {
-            game.roll("9-");
-        }
-        expect(game.score()).toBe(90);
-    });
-
-    test("all nines with 0", () => {
-        for (let i = 0; i < 10; i++) {
-            game.roll("9-");
-        }
-        expect(game.score()).toBe(90);
+    // with valid mixed input
+    test("When input is mixed", () => {
+        expect(() => {
+            processGameString("X 9- 5/ 5/ 9- 9- 9- 9- 9- 9-");
+        }).not.toThrow("Invalid input");
     });
 });
