@@ -67,7 +67,7 @@ export class BowlingGame {
     }
 }
 
-// Define a function to process rolls for a given game string and return the score
+// elper function
 export function processGameString(gameString: string): number {
     const game = new BowlingGame();
     for (const symbol of gameString.split(" ")) {
@@ -86,20 +86,20 @@ const game1 = new BowlingGame();
 const game2 = new BowlingGame();
 const game3 = new BowlingGame();
 
-
-
 // Process rolls for game 1
-const game1Score = processGameString(game1String);
-console.log(game1Score);
+for (const symbol of game1String.split(" ")) {
+    game1.roll(symbol);
+}
+console.log(game1.score());
 
 // Process rolls for game 2
-const game2Score = processGameString(game2String);
-console.log(game2Score);
+for (const symbol of game2String.split(" ")) {
+    game2.roll(symbol);
+}
+console.log(game2.score());
 
 // Process rolls for game 3
-const game3Score = processGameString(game3String);
-console.log(game3Score);
-
-
-
-    
+for (const symbol of game3String.split(" ")) {
+    game3.roll(symbol);
+}
+console.log(game3.score());
